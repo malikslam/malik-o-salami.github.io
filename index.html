@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Malik Oyewale Salami — Metadata Quality & Research Integrity</title>
+<meta name="description" content="Malik Oyewale Salami builds trustworthy scholarly infrastructure through metadata quality, retraction indexing, and entity-resolution research.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1C2A3A;
+    --paper:#EDEAE0;
+    --paper-warm:#F5F3EC;
+    --card:#FFFFFF;
+    --teal:#2F7864;
+    --amber:#B8722E;
+    --slate:#5B6472;
+    --line:#D8D3C4;
+    --line-soft:#E4E0D3;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter', sans-serif;
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  a{color:inherit;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .wrap{max-width:980px; margin:0 auto; padding:0 28px;}
+
+  /* ---- Nav ---- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(237,234,224,0.92);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  nav.wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    height:64px;
+  }
+  .brand{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.05rem;
+    letter-spacing:-0.01em;
+  }
+  .navlinks{display:flex; gap:28px; list-style:none;}
+  .navlinks a{
+    font-size:0.85rem; text-transform:uppercase; letter-spacing:0.08em;
+    color:var(--slate); text-decoration:none; font-weight:600;
+    transition:color .15s;
+  }
+  .navlinks a:hover, .navlinks a:focus-visible{color:var(--teal);}
+  .navtoggle{display:none; background:none; border:none; font-size:1.5rem; color:var(--ink); cursor:pointer;}
+
+  /* ---- Hero ---- */
+  .hero{padding:76px 0 56px;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.78rem; color:var(--teal); text-transform:uppercase;
+    letter-spacing:0.12em; margin-bottom:18px; display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{content:""; width:22px; height:1px; background:var(--teal); display:inline-block;}
+  h1.name{
+    font-family:'Fraunces', serif; font-weight:600; font-size:clamp(2.4rem, 5vw, 3.6rem);
+    line-height:1.05; letter-spacing:-0.02em; max-width:14ch;
+  }
+  .thesis{
+    margin-top:22px; font-size:1.15rem; color:var(--slate); max-width:56ch;
+    line-height:1.6;
+  }
+  .thesis strong{color:var(--ink); font-weight:600;}
+  .hero-links{
+    margin-top:28px; display:flex; gap:22px; flex-wrap:wrap; align-items:center;
+  }
+  .hero-links a{
+    font-size:0.9rem; text-decoration:none; color:var(--ink);
+    border-bottom:1px solid var(--ink); padding-bottom:2px;
+    transition:opacity .15s;
+  }
+  .hero-links a:hover{opacity:0.6;}
+  .affil{
+    margin-top:36px; font-size:0.92rem; color:var(--slate); max-width:60ch;
+    padding-top:20px; border-top:1px solid var(--line);
+  }
+  .affil a{text-decoration:underline; text-decoration-color:var(--line);}
+
+  /* ---- Section shell ---- */
+  section{padding:64px 0;}
+  section + section{border-top:1px solid var(--line);}
+  .sec-head{margin-bottom:36px;}
+  .sec-eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:0.75rem; color:var(--amber);
+    text-transform:uppercase; letter-spacing:0.1em; margin-bottom:10px;
+  }
+  h2{
+    font-family:'Fraunces', serif; font-weight:600; font-size:1.9rem; letter-spacing:-0.01em;
+  }
+  .sec-sub{color:var(--slate); margin-top:10px; max-width:62ch; font-size:1rem;}
+
+  /* ---- Signature widget: cross-source agreement ---- */
+  .ledger{
+    background:var(--card); border:1px solid var(--line); border-radius:4px;
+    padding:28px; margin-top:8px;
+  }
+  .ledger-top{
+    display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:10px;
+    margin-bottom:22px;
+  }
+  .ledger-title{font-weight:600; font-size:0.95rem;}
+  .ledger-hint{font-size:0.82rem; color:var(--slate);}
+  .sources{display:grid; grid-template-columns:repeat(4, 1fr); gap:10px;}
+  .source-btn{
+    background:var(--paper-warm); border:1px solid var(--line); border-radius:4px;
+    padding:16px 12px; cursor:pointer; text-align:center;
+    font-family:'IBM Plex Mono', monospace; font-size:0.8rem;
+    transition:all .15s; color:var(--ink);
+  }
+  .source-btn:hover{border-color:var(--teal);}
+  .source-btn.state-indexed{border-color:var(--teal); background:#EAF4F0; color:var(--teal); font-weight:600;}
+  .source-btn.state-missing{border-color:var(--amber); background:#FBF0E4; color:var(--amber); font-weight:600;}
+  .source-status{display:block; font-size:0.7rem; margin-top:6px; opacity:0.85;}
+  .ledger-readout{
+    margin-top:20px; padding-top:18px; border-top:1px dashed var(--line);
+    font-size:0.9rem; color:var(--slate); min-height:1.4em;
+  }
+  .ledger-readout strong{color:var(--ink);}
+
+  /* ---- Pillars ---- */
+  .pillars{display:grid; gap:14px;}
+  .pillar{
+    background:var(--card); border:1px solid var(--line); border-radius:4px;
+    padding:22px 24px; cursor:pointer; transition:border-color .15s;
+  }
+  .pillar:hover{border-color:var(--teal);}
+  .pillar-head{display:flex; justify-content:space-between; align-items:center; gap:16px;}
+  .pillar-num{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--amber);}
+  .pillar-title{font-family:'Fraunces', serif; font-weight:600; font-size:1.15rem; flex:1;}
+  .pillar-arrow{color:var(--slate); transition:transform .2s; font-size:0.9rem;}
+  .pillar.open .pillar-arrow{transform:rotate(180deg);}
+  .pillar-body{
+    max-height:0; overflow:hidden; transition:max-height .25s ease;
+  }
+  .pillar.open .pillar-body{max-height:220px;}
+  .pillar-body-inner{padding-top:14px; font-size:0.94rem; color:var(--slate); line-height:1.6;}
+  .pillar-tags{margin-top:10px; display:flex; gap:8px; flex-wrap:wrap;}
+  .tag{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; color:var(--teal);
+    background:#EAF4F0; padding:3px 8px; border-radius:3px;
+  }
+  .thesis-strip{
+    margin-top:30px; font-family:'Fraunces', serif; font-size:1.05rem; font-style:italic;
+    color:var(--ink); border-left:2px solid var(--amber); padding-left:18px;
+  }
+
+  /* ---- Publications & News (two-column, Yilin-style) ---- */
+  .pubnews-grid{display:grid; grid-template-columns:1.15fr 0.85fr; gap:56px; align-items:start;}
+  .col-head{display:flex; align-items:center; gap:10px; margin-bottom:26px;}
+  .col-dot{
+    width:13px; height:13px; border-radius:50%; border:2px solid var(--teal);
+    position:relative; flex-shrink:0;
+  }
+  .col-dot::after{
+    content:""; position:absolute; top:50%; left:50%; width:5px; height:5px;
+    background:var(--teal); border-radius:50%; transform:translate(-50%,-50%);
+  }
+  .col-head h2{font-size:1.35rem;}
+
+  .pub-list{display:flex; flex-direction:column;}
+  .pub{
+    display:grid; grid-template-columns:60px 1fr; gap:16px;
+    padding:18px 0; border-bottom:1px solid var(--line-soft);
+  }
+  .pub:first-child{padding-top:0;}
+  .pub-badge{
+    width:60px; height:60px; border-radius:4px; flex-shrink:0;
+    background:var(--paper-warm); border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-size:0.6rem; font-weight:600;
+    color:var(--teal); text-align:center; line-height:1.2; padding:4px;
+  }
+  .pub-venue{
+    font-family:'IBM Plex Mono', monospace; font-size:0.8rem; font-weight:600;
+    color:var(--teal); text-transform:uppercase; letter-spacing:0.02em;
+  }
+  .pub-title{font-weight:600; font-size:0.94rem; line-height:1.4; margin-top:5px;}
+  .pub-meta{font-size:0.82rem; color:var(--slate); margin-top:5px;}
+  .pub-badges{margin-top:8px; display:flex; gap:8px; flex-wrap:wrap;}
+  .badge{
+    font-size:0.7rem; font-family:'IBM Plex Mono', monospace;
+    padding:2px 8px; border-radius:3px; border:1px solid var(--line);
+    color:var(--slate);
+  }
+  .badge.award{border-color:var(--amber); color:var(--amber);}
+  .pub-title a{text-decoration:none; border-bottom:1px solid transparent;}
+  .pub-title a:hover{border-bottom-color:var(--ink);}
+
+  /* ---- Experience timeline ---- */
+  .timeline{border-left:1px solid var(--line); margin-left:6px;}
+  .tl-item{position:relative; padding:0 0 32px 28px;}
+  .tl-item:last-child{padding-bottom:0;}
+  .tl-item::before{
+    content:""; position:absolute; left:-5px; top:4px;
+    width:9px; height:9px; border-radius:50%; background:var(--teal);
+  }
+  .tl-role{font-weight:600; font-size:1rem;}
+  .tl-org{font-size:0.9rem; color:var(--slate); margin-top:2px;}
+  .tl-date{font-family:'IBM Plex Mono', monospace; font-size:0.78rem; color:var(--amber); margin-top:4px; display:block;}
+  .tl-desc{margin-top:10px; font-size:0.92rem; color:var(--slate); max-width:64ch;}
+
+  /* ---- Funding / partners ---- */
+  .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:32px;}
+  .flist{list-style:none;}
+  .flist li{
+    padding:14px 0; border-bottom:1px solid var(--line-soft);
+    display:flex; justify-content:space-between; gap:12px; font-size:0.92rem;
+  }
+  .flist li:first-child{padding-top:0;}
+  .flist .f-name{font-weight:600;}
+  .flist .f-note{color:var(--slate); font-size:0.85rem;}
+
+  /* ---- News ---- */
+  .news-list{display:flex; flex-direction:column;}
+  .news-item{
+    padding:14px 0; border-bottom:1px solid var(--line-soft); font-size:0.88rem;
+  }
+  .news-item:first-child{padding-top:0;}
+  .news-date{
+    font-family:'IBM Plex Mono', monospace; font-size:0.7rem; color:var(--amber);
+    text-transform:uppercase; letter-spacing:0.06em; display:block; margin-bottom:5px; font-weight:600;
+  }
+  .news-body a{text-decoration:underline; text-decoration-color:var(--line); color:var(--teal); font-weight:500;}
+
+  /* ---- Footer ---- */
+  footer{padding:48px 0 60px; text-align:center;}
+  .footer-links{display:flex; justify-content:center; gap:24px; flex-wrap:wrap; margin-bottom:18px;}
+  .footer-links a{font-size:0.9rem; text-decoration:none; border-bottom:1px solid var(--line);}
+  .footer-note{font-size:0.8rem; color:var(--slate);}
+
+  @media (max-width: 720px){
+    .navlinks{
+      position:absolute; top:64px; left:0; right:0; background:var(--paper);
+      flex-direction:column; padding:18px 28px; border-bottom:1px solid var(--line);
+      display:none; gap:16px;
+    }
+    .navlinks.show{display:flex;}
+    .navtoggle{display:block;}
+    .grid-2{grid-template-columns:1fr;}
+    .sources{grid-template-columns:repeat(2, 1fr);}
+    .pubnews-grid{grid-template-columns:1fr; gap:40px;}
+    .pub{grid-template-columns:52px 1fr; gap:12px;}
+    .pub-badge{width:52px; height:52px; font-size:0.55rem;}
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    *{transition:none !important; scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="brand">Malik Oyewale Salami</div>
+    <button class="navtoggle" id="navToggle" aria-label="Toggle menu">☰</button>
+    <ul class="navlinks" id="navLinks">
+      <li><a href="#research">Research</a></li>
+      <li><a href="#publications">Publications</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#funding">Funding</a></li>
+      <li><a href="#news">News</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero wrap">
+  <div class="eyebrow">Ph.D. Candidate · Information Science · UIUC</div>
+  <h1 class="name">Malik Oyewale Salami</h1>
+  <p class="thesis">
+    I study <strong>metadata and entity-resolution quality</strong> as the foundation for trustworthy
+    scholarly discovery, research integrity, and research security — auditing how the scholarly record
+    is built, indexed, and where it quietly breaks.
+  </p>
+  <div class="hero-links">
+    <a href="mailto:maliksalami05@gmail.com">Email</a>
+    <a href="#" id="scholarLink">Google Scholar</a>
+    <a href="#" id="orcidLink">ORCID</a>
+    <a href="#" id="githubLink">GitHub</a>
+    <a href="#" id="linkedinLink">LinkedIn</a>
+  </div>
+  <p class="affil">
+    Ph.D. candidate in Information Science at the <a href="https://ischool.illinois.edu/">University of Illinois at Urbana–Champaign</a>,
+    based in the InfoQuality Lab. My work on retraction indexing has been supported by the Sloan Foundation
+    and shaped by direct collaboration with Crossref, Clarivate, and Dimensions.
+  </p>
+</section>
+
+<section id="research">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Research</div>
+      <h2>Four questions about the scholarly record</h2>
+      <p class="sec-sub">Each pillar attacks the same underlying problem — accurate, trustworthy linkage between
+      records and reality — from a different point in the pipeline.</p>
+    </div>
+
+    <div class="ledger">
+      <div class="ledger-top">
+        <div class="ledger-title mono">Live demo — one retraction, four sources</div>
+        <div class="ledger-hint">Click a source to check whether it indexes this record as retracted</div>
+      </div>
+      <div class="sources" id="sourceGrid">
+        <button class="source-btn" data-source="Crossref" data-status="indexed">
+          Crossref
+          <span class="source-status">click to check</span>
+        </button>
+        <button class="source-btn" data-source="Retraction Watch" data-status="indexed">
+          Retraction Watch
+          <span class="source-status">click to check</span>
+        </button>
+        <button class="source-btn" data-source="Scopus" data-status="missing">
+          Scopus
+          <span class="source-status">click to check</span>
+        </button>
+        <button class="source-btn" data-source="Web of Science" data-status="missing">
+          Web of Science
+          <span class="source-status">click to check</span>
+        </button>
+      </div>
+      <div class="ledger-readout" id="ledgerReadout">
+        Every source above corresponds to real disagreement patterns found across large-scale
+        cross-database retraction indexing analysis — this is the exact class of problem my research measures.
+      </div>
+    </div>
+
+    <div class="pillars" style="margin-top:28px;">
+      <div class="pillar" data-idx="1">
+        <div class="pillar-head">
+          <span class="pillar-num">01</span>
+          <span class="pillar-title">Retraction & Metadata Indexing Quality</span>
+          <span class="pillar-arrow">▾</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-body-inner">
+            Auditing whether retracted publications are consistently and accurately indexed across major
+            bibliographic databases — Crossref, Retraction Watch, Scopus, and Web of Science — and diagnosing
+            where the scholarly record disagrees with itself.
+            <div class="pillar-tags">
+              <span class="tag">QSS (accepted)</span>
+              <span class="tag">ASIS&T MET-STI 2024 — Best Paper</span>
+              <span class="tag">STI 2023</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar" data-idx="2">
+        <div class="pillar-head">
+          <span class="pillar-num">02</span>
+          <span class="pillar-title">Citation Data Infrastructure</span>
+          <span class="pillar-arrow">▾</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-body-inner">
+            Building large-scale, reliability-filtered citation datasets that other researchers can trust
+            and reuse — the data-curation counterpart to auditing indexing quality.
+            <div class="pillar-tags">
+              <span class="tag">uCite — Data in Brief, 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar" data-idx="3">
+        <div class="pillar-head">
+          <span class="pillar-num">03</span>
+          <span class="pillar-title">Scholarly Network Modeling</span>
+          <span class="pillar-arrow">▾</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-body-inner">
+            Using probabilistic machine learning over 130M+ PubMed and ProQuest records to infer
+            mentor–mentee relationships — modeling the institutional structures that shape how research
+            gets done in the first place.
+            <div class="pillar-tags">
+              <span class="tag">Student Researcher, 2024–present</span>
+              <span class="tag">HPC / Slurm</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillar" data-idx="4">
+        <div class="pillar-head">
+          <span class="pillar-num">04</span>
+          <span class="pillar-title">Open Science Infrastructure & Industry Translation</span>
+          <span class="pillar-arrow">▾</span>
+        </div>
+        <div class="pillar-body">
+          <div class="pillar-body-inner">
+            Turning quality findings into open pipelines, datasets, and direct feedback for the
+            organizations that maintain the scholarly record — funded in part by the Sloan Foundation.
+            <div class="pillar-tags">
+              <span class="tag">Crossref</span>
+              <span class="tag">Clarivate</span>
+              <span class="tag">Dimensions</span>
+              <span class="tag">$250K Sloan Foundation methodology</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="thesis-strip">
+      "You can't trust what you infer from scholarly data — mentorship patterns, impact, retraction status —
+      unless you first understand and fix how that data is indexed and integrated."
+    </p>
+  </div>
+</section>
+
+<section id="publications">
+  <div class="wrap">
+    <div class="pubnews-grid">
+
+      <div>
+        <div class="col-head"><span class="col-dot"></span><h2>Featured Publications</h2></div>
+        <div class="pub-list">
+
+          <div class="pub">
+            <div class="pub-badge">QSS<br>2025</div>
+            <div>
+              <div class="pub-venue">Quantitative Science Studies</div>
+              <div class="pub-title">Analyzing the consistency of retraction indexing</div>
+              <div class="pub-meta">Salami, M. O., McCumber, C., &amp; Schneider, J. — posted on MetaArXiv</div>
+              <div class="pub-badges"><span class="badge award">Accepted</span></div>
+            </div>
+          </div>
+
+          <div class="pub">
+            <div class="pub-badge">DIB<br>2025</div>
+            <div>
+              <div class="pub-venue">Data in Brief</div>
+              <div class="pub-title">uCite: The union of nine large-scale public PubMed citation datasets with reliability filtering</div>
+              <div class="pub-meta">Fang, L., Salami, M. O., Weber, G. M., Vetle, I. T. — Vol. 60, 111535</div>
+            </div>
+          </div>
+
+          <div class="pub">
+            <div class="pub-badge">MET<br>STI'24</div>
+            <div>
+              <div class="pub-venue">ASIS&amp;T MET-STI 2024</div>
+              <div class="pub-title">Reassessment of the agreement in retraction indexing across 4 multidisciplinary sources: Crossref, Retraction Watch, Scopus, and Web of Science</div>
+              <div class="pub-meta">Salami, M. O., McCumber, C., &amp; Schneider, J.</div>
+              <div class="pub-badges"><span class="badge award">$500 Best Paper Award</span></div>
+            </div>
+          </div>
+
+          <div class="pub">
+            <div class="pub-badge">STI<br>2023</div>
+            <div>
+              <div class="pub-venue">STI 2023</div>
+              <div class="pub-title">Assessing the agreement in retraction indexing across 4 multidisciplinary sources: Crossref, Retraction Watch, Scopus, and Web of Science</div>
+              <div class="pub-meta">Schneider, J., Lee, J., Zheng, H., &amp; Salami, M. O.</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div id="news">
+        <div class="col-head"><span class="col-dot"></span><h2>Latest News</h2></div>
+        <div class="news-list">
+          <div class="news-item">
+            <span class="news-date">2025</span>
+            <div class="news-body">Paper on retraction indexing consistency <a href="#">accepted at Quantitative Science Studies</a>.</div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">2025</span>
+            <div class="news-body">uCite dataset paper <a href="#">published in Data in Brief</a>.</div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">2024</span>
+            <div class="news-body">Received the <a href="#">$500 Best Paper Award</a> at ASIS&amp;T MET-STI 2024.</div>
+          </div>
+          <div class="news-item">
+            <span class="news-date">2023</span>
+            <div class="news-body">Presented cross-database retraction indexing findings at STI 2023.</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Experience</div>
+      <h2>Where the work has happened</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-role">Student Researcher</div>
+        <div class="tl-org">School of Information Sciences, UIUC</div>
+        <span class="tl-date">2024 – Present</span>
+        <div class="tl-desc">Scalable probabilistic ML modeling of academic mentor–mentee relationships across 130M+ PubMed and ProQuest records, using HPC-orchestrated ETL and a star-schema-like architecture.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-role">Research Assistant</div>
+        <div class="tl-org">InfoQuality Lab, UIUC</div>
+        <span class="tl-date">May 2023 – Dec 2025</span>
+        <div class="tl-desc">Built ETL pipelines and a reusable data-quality framework to assess retraction indexing across 25+ bibliographic databases; delivered open datasets and pipeline code used by research and industry.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-role">Graduate Teaching Assistant</div>
+        <div class="tl-org">UIUC</div>
+        <span class="tl-date">Summer 2021 – Spring 2025</span>
+        <div class="tl-desc">Taught SQL, Python, ETL design, and data modeling to 40+ students per semester (IS 515, CS 513, IS 305); average 25% improvement in project scores.</div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-role">Research Assistant</div>
+        <div class="tl-org">Coordinated Science Lab, UIUC</div>
+        <span class="tl-date">June 2022 – Dec 2022</span>
+        <div class="tl-desc">Led data management strategy for a $75K community-level antimicrobial resistance tracking initiative; interviewed 10+ hospital coordinators and facilitated stakeholder workshops toward additional NSF funding.</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="funding">
+  <div class="wrap">
+    <div class="sec-head">
+      <div class="sec-eyebrow">Funding & Partners</div>
+      <h2>Support and collaboration</h2>
+    </div>
+    <div class="grid-2">
+      <div>
+        <h3 style="font-family:'Fraunces',serif; font-size:1rem; margin-bottom:14px; color:var(--slate); text-transform:uppercase; letter-spacing:0.06em; font-weight:600;">Funding</h3>
+        <ul class="flist">
+          <li>
+            <div>
+              <div class="f-name">Sloan Foundation</div>
+              <div class="f-note">Retraction indexing methodology, $250K proposal</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h3 style="font-family:'Fraunces',serif; font-size:1rem; margin-bottom:14px; color:var(--slate); text-transform:uppercase; letter-spacing:0.06em; font-weight:600;">Industry Collaboration</h3>
+        <ul class="flist">
+          <li><div class="f-name">Crossref</div></li>
+          <li><div class="f-name">Clarivate</div></li>
+          <li><div class="f-name">Dimensions</div></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="wrap">
+  <div class="footer-links">
+    <a href="mailto:maliksalami05@gmail.com">maliksalami05@gmail.com</a>
+    <a href="#" id="scholarLinkFooter">Google Scholar</a>
+    <a href="#" id="githubLinkFooter">GitHub</a>
+  </div>
+  <div class="footer-note">© <span id="year"></span> Malik Oyewale Salami. Built with intent, indexed with care.</div>
+</footer>
+
+<script>
+  // Mobile nav toggle
+  document.getElementById('navToggle').addEventListener('click', function(){
+    document.getElementById('navLinks').classList.toggle('show');
+  });
+  document.querySelectorAll('.navlinks a').forEach(a => a.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('show');
+  }));
+
+  // Footer year
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Pillar accordion
+  document.querySelectorAll('.pillar').forEach(p => {
+    p.querySelector('.pillar-head').addEventListener('click', () => {
+      const wasOpen = p.classList.contains('open');
+      document.querySelectorAll('.pillar').forEach(o => o.classList.remove('open'));
+      if(!wasOpen) p.classList.add('open');
+    });
+  });
+
+  // Signature widget: cross-source agreement demo
+  const readout = document.getElementById('ledgerReadout');
+  const explanations = {
+    'Crossref': 'indexed as a formal retraction notice, linked to the original DOI.',
+    'Retraction Watch': 'flagged in the Retraction Watch Database with a documented reason.',
+    'Scopus': 'not indexed as retracted — the original record shows no retraction flag.',
+    'Web of Science': 'not indexed as retracted — coverage gap for this source at time of check.'
+  };
+  document.querySelectorAll('.source-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const src = btn.dataset.source;
+      const status = btn.dataset.status;
+      document.querySelectorAll('.source-btn').forEach(b => b.classList.remove('state-indexed','state-missing'));
+      btn.classList.add(status === 'indexed' ? 'state-indexed' : 'state-missing');
+      btn.querySelector('.source-status').textContent = status === 'indexed' ? 'flagged retracted' : 'not flagged';
+      readout.innerHTML = '<strong>' + src + '</strong> — ' + explanations[src] +
+        ' This kind of source-to-source disagreement is exactly what cross-database retraction indexing analysis measures.';
+    });
+  });
+</script>
+
+</body>
+</html>
